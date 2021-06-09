@@ -30,13 +30,45 @@
             font-family: 'Nanum Gothic', sans-serif;
         }
 
+        .card{
+            float: left;
+            border: 2px solid;
+            margin: 20px;
+            width: 300px;
+            height: 440px;
+            padding:5px;
+            text-align: center;
+            line-height: 200%;
+            border-radius: 15px
+        }
+
         .wrap {
-            width: 800px;
+            width: 1800px;
 
         }
 
-        .company {
+        .img-icon {
+            width: 280px;
+            left: 50px;
+            height: 200px;
+            border-radius: 15px;
+        }
 
+        .td1 {
+            color: darkblue;
+            width: 100px;
+            /*border:1px solid red;*/
+        }
+        .td2 {
+            color: black;
+            width: 300px;
+            /*border:1px solid red;*/
+        }
+
+        .boxbtn {
+            width: 100px;
+            height: 35px;
+            text-align: center;
         }
 
     </style>
@@ -55,27 +87,27 @@
                     let lists = response['applists'];
                     console.log(lists)
                     for (let i = 1; i < lists.length; i++) {
+                        let type = lists[i]['type']
                         let app_name = lists[i]['app_name']
                         let company = lists[i]['company']
                         let google_url = lists[i]['google_url']
                         let image_url = lists[i]['image_url']
 
-                        let temp_html = `        <div class="card">
-                                                        <img class="card-img-top"
-                                                             src="${image_url}"
-                                                             alt="Card image cap">
-                                                        <div class="card-body">
-                                                            <h4 class = "company"><b>${company}</b></h4>
-                                                            <h5>${app_name}</h5>
-                                                            <div class="input-group mb-3">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text" id="inputGroup-sizing-default">평균 평점</span>
-                                                                </div>
-                                                                <input type="text" class="form-control" aria-label="Default"
-                                                                       aria-describedby="inputGroup-sizing-default">
-                                                            </div>
-                                                        </div>
-                                                    </div>`
+                        let temp_html = `<div class="card">
+                                                <img class="card-img-top img-icon"
+                                                     src="${image_url}"
+                                                     alt="Card image cap">
+                                                <div class="card-body">
+                                                    <table>
+                                                        <tr><td class="td1"><h6><b>구분</b></h6></td><td class="td2 appname" id="appname"><b>${type}</b></td></tr>
+                                                        <tr><td class="td1"><h6><b>어플명</b></h6></td><td class="td2 appname" id="appname"><b>${app_name}</b></td></tr>
+                                                        <tr><td class="td1"><h6><b>회사명</b></h6></td><td class="td2"><b>${company}</b></td></tr>
+                                                        <tr><td class="td1"><h6>평점</h6></td><td class="td2">몇점</td></tr>
+                                                        <tr><td class="td1"><h6>리뷰수</h6></td><td class="td2">몇개</td></tr>
+                                                    </table>
+                                                     <button type="button" class="btn btn-outline-dark boxbtn">리뷰작성</button>
+                                                </div>
+                                            </div>`
                         $('#app-evaluation').append(temp_html)
                     }
                 }
@@ -89,7 +121,7 @@
 
 <body>
 <div class = "wrap">
-    <div class="card-columns" id="app-evaluation">
+    <div id="app-evaluation">
     </div>
 </div>
 
